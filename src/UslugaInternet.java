@@ -9,10 +9,6 @@ public class UslugaInternet {
 
     private static ArrayList<UslugaInternet> uslugaInternets;
 
-    public UslugaInternet(String pakietDanychWGb, double cena) {
-        this.pakietDanychWGb = pakietDanychWGb;
-        this.cena = cena;
-    }
     public String getPakietDanychWGb() {
         return pakietDanychWGb;
     }
@@ -28,6 +24,12 @@ public class UslugaInternet {
     public void setCena(double cena) {
         this.cena = cena;
     }
+
+    public UslugaInternet(String pakietDanychWGb, double cena) {
+        setCena(cena);
+       setPakietDanychWGb(pakietDanychWGb);
+    }
+
     public String toString(){
         return pakietDanychWGb + "Gb"+ " " + cena+ "zl";
     }

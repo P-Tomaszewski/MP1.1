@@ -17,6 +17,51 @@ public  class Oferta  implements Serializable {
     private SprzetModemWiFi sprzetModemWiFi; //atr. zlozony i opcjonalny
     private static ArrayList<Oferta> oferty; // ekstansja klasy
 
+    public LocalDate getDataKoncaDostepnosciOferty() {
+        return dataKoncaDostepnosciOferty;
+    }
+
+
+    public int getOkresZobowiazania() {
+        return okresZobowiazania;
+    }
+
+    public void setOkresZobowiazania(int okresZobowiazania) {
+        this.okresZobowiazania = okresZobowiazania;
+    }
+
+    public UslugaInternet getUslugaInternet() {
+        return uslugaInternet;
+    }
+
+    public void setUslugaInternet(UslugaInternet uslugaInternet) {
+        this.uslugaInternet = uslugaInternet;
+    }
+
+    public SprzetModemWiFi getSprzetModemWiFi() {
+        return sprzetModemWiFi;
+    }
+
+    public void setSprzetModemWiFi(SprzetModemWiFi sprzetModemWiFi) {
+        this.sprzetModemWiFi = sprzetModemWiFi;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescript() {
+        return descript;
+    }
+
+    public void setDescript(String descript) {
+        this.descript = descript;
+    }
 
     private static void addOferta(Oferta oferta){
         if(oferta == null){
@@ -78,7 +123,7 @@ public  class Oferta  implements Serializable {
         stream.writeObject(oferty);
     }
     @SuppressWarnings("unchecked")
-    public static void readHorses(ObjectInputStream stream) throws IOException, ClassNotFoundException{
+    public static void readOferta(ObjectInputStream stream) throws IOException, ClassNotFoundException{
         oferty = (ArrayList<Oferta>) stream.readObject();
     }
 
@@ -96,36 +141,31 @@ public  class Oferta  implements Serializable {
     }
 
     public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
-                  LocalDate dataKoncaDostepnosciOferty, SprzetModemWiFi sprzetModemWiFi) {
-        this.name = name;
-        this.descript = descript;
-        this.dataUtworzeniaOferty = dataUtworzeniaOferty;
-        this.okresZobowiazania = okresZobowiazania;
-        this.dataKoncaDostepnosciOferty = dataKoncaDostepnosciOferty;
-        this.sprzetModemWiFi = sprzetModemWiFi;
-    }
-
-    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
-                  LocalDate dataKoncaDostepnosciOferty, UslugaInternet uslugaInternet) {
-        setName(name);
-        this.descript = descript;
-        this.dataUtworzeniaOferty = dataUtworzeniaOferty;
-        this.okresZobowiazania = okresZobowiazania;
-        this.dataKoncaDostepnosciOferty = dataKoncaDostepnosciOferty;
-        this.uslugaInternet = uslugaInternet;
-
-    }
-
-    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
-                  LocalDate dataKoncaDostepnosciOferty, UslugaInternet uslugaInternet,
                   SprzetModemWiFi sprzetModemWiFi) {
-        this.name = name;
-        this.descript = descript;
-        this.dataUtworzeniaOferty = dataUtworzeniaOferty;
-        this.okresZobowiazania = okresZobowiazania;
-        this.dataKoncaDostepnosciOferty = dataKoncaDostepnosciOferty;
-        this.uslugaInternet = uslugaInternet;
-        this.sprzetModemWiFi = sprzetModemWiFi;
+        setName(name);
+        setDescript(descript);
+        setDataUtworzeniaOferty(dataUtworzeniaOferty);
+        setOkresZobowiazania(okresZobowiazania);
+        setSprzetModemWiFi(sprzetModemWiFi);
+    }
+
+    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
+                  UslugaInternet uslugaInternet) {
+        setName(name);
+        setDescript(descript);
+        setDataUtworzeniaOferty(dataUtworzeniaOferty);
+        setOkresZobowiazania(okresZobowiazania);
+        setUslugaInternet(uslugaInternet);
+    }
+
+    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
+                   UslugaInternet uslugaInternet, SprzetModemWiFi sprzetModemWiFi) {
+        setName(name);
+        setDescript(descript);
+        setDataUtworzeniaOferty(dataUtworzeniaOferty);
+        setOkresZobowiazania(okresZobowiazania);
+        setUslugaInternet(uslugaInternet);
+        setSprzetModemWiFi(sprzetModemWiFi);
     }
 
     public LocalDate getDataUtworzeniaOferty() {
@@ -142,51 +182,7 @@ public  class Oferta  implements Serializable {
         this.dataUtworzeniaOferty = dataUtworzeniaOferty;
     }
 
-    public LocalDate getDataKoncaDostepnosciOferty() {
-        return dataKoncaDostepnosciOferty;
-    }
 
-
-    public int getOkresZobowiazania() {
-        return okresZobowiazania;
-    }
-
-    public void setOkresZobowiazania(int okresZobowiazania) {
-        this.okresZobowiazania = okresZobowiazania;
-    }
-
-    public UslugaInternet getUslugaInternet() {
-        return uslugaInternet;
-    }
-
-    public void setUslugaInternet(UslugaInternet uslugaInternet) {
-        this.uslugaInternet = uslugaInternet;
-    }
-
-    public SprzetModemWiFi getSprzetModemWiFi() {
-        return sprzetModemWiFi;
-    }
-
-    public void setSprzetModemWiFi(SprzetModemWiFi sprzetModemWiFi) {
-        this.sprzetModemWiFi = sprzetModemWiFi;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescript() {
-        return descript;
-    }
-
-    public void setDescript(String descript) {
-        this.descript = descript;
-    }
 
 
 

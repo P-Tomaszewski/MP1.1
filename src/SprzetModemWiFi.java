@@ -11,13 +11,6 @@ public class SprzetModemWiFi {
 
     private static ArrayList<SprzetModemWiFi> sprzetModemWiFis;
 
-    public SprzetModemWiFi(String model, String nrSeryjny, int predkoscMax, int predkoscMin) {
-        this.model = model;
-        this.nrSeryjny = nrSeryjny;
-        this.predkoscMax = predkoscMax;
-        this.predkoscMin = predkoscMin;
-    }
-
     public String getModel() {
         return model;
     }
@@ -48,6 +41,13 @@ public class SprzetModemWiFi {
 
     public void setPredkoscMin(int predkoscMin) {
         this.predkoscMin = predkoscMin;
+    }
+
+    public SprzetModemWiFi(String model, String nrSeryjny, int predkoscMax, int predkoscMin) {
+       setModel(model);
+       setNrSeryjny(nrSeryjny);
+        setPredkoscMin(predkoscMin);
+       setPredkoscMax(predkoscMax);
     }
 
     public String toString(){
