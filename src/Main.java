@@ -77,7 +77,7 @@ Ekstensja
 
        // Atrybut zlozony
         oferta2.addSprzetModemwiFi(sprzetModemWiFi1);
-        System.out.println("Atrybut z�o�ony: " + oferta2.getSprzetModemWiFi().toString());
+        System.out.println("Atrybut zlozony: " + oferta2.getSprzetModemWiFi().toString());
 
         //Atrybut opcjonalny
         System.out.println("Atrybut opcjonalny:");
@@ -85,7 +85,7 @@ Ekstensja
         System.out.println("oferta  " + oferta2.getName() + " Pełna opcja uslugi i sprzet " + oferta2.getUslugaInternet().toString() + " " + oferta2.getSprzetModemWiFi().toString());
 
         //Atrybut powtarzalny
-        System.out.println("Atrybut powtarzalny:");
+        System.out.print("Atrybut powtarzalny, ");
         oferta.addSprzetModemwiFi(sprzetModemWiFi);
         oferta.addSprzetModemwiFi(sprzetModemWiFi1);
         System.out.println("Sprzet w ofercie " + oferta.getName() + ":");
@@ -94,6 +94,9 @@ Ekstensja
         }
 
         ObjectPlus.pokazEkstensje(Oferta.class);
+
+        ObjectPlus.pokazEkstensje(SprzetModemWiFi.class);
+        ObjectPlus.pokazEkstensje(UslugaInternet.class);
 
         try
         {
@@ -110,9 +113,7 @@ Ekstensja
             i.printStackTrace();
         }
 
-        System.out.println("Ekstensja klasy Oferta po dodaniu sprzetu:");
-        Oferta.printOferty(null);
-        System.out.println();
+
 
 
     }

@@ -4,7 +4,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UslugaInternet extends ObjectPlus {
+public class UslugaInternet extends ObjectPlus implements Serializable {
 
     private static final long serialVersionUID = 217L;
     String pakietDanychWGb;

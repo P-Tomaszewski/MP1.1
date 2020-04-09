@@ -1,13 +1,8 @@
-
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public  class Oferta extends ObjectPlus {
+public  class Oferta extends ObjectPlus implements Serializable{
 
     private static final long serialVersionUID = 007L;
     private String name;
@@ -74,6 +69,20 @@ public  class Oferta extends ObjectPlus {
 
     public void setDescript(String descript) {
         this.descript = descript;
+    }
+
+    public LocalDate getDataUtworzeniaOferty() {
+        return dataUtworzeniaOferty;
+    }
+
+    public void setDataUtworzeniaOferty(LocalDate dataUtworzeniaOferty) {
+        if(okresZobowiazania == 12) {
+            this.dataKoncaDostepnosciOferty = dataUtworzeniaOferty.plusYears(1);
+        } else
+        {
+            this.dataKoncaDostepnosciOferty = dataUtworzeniaOferty.plusYears(2);
+        }
+        this.dataUtworzeniaOferty = dataUtworzeniaOferty;
     }
 
     private static void addOferta(Oferta oferta){
@@ -164,19 +173,5 @@ public  class Oferta extends ObjectPlus {
         setUslugaInternet(uslugaInternet);
         this.sprzetModemWiFi = new ArrayList<>();
         addOferta(this);
-    }
-
-    public LocalDate getDataUtworzeniaOferty() {
-        return dataUtworzeniaOferty;
-    }
-
-    public void setDataUtworzeniaOferty(LocalDate dataUtworzeniaOferty) {
-        if(okresZobowiazania == 12) {
-            this.dataKoncaDostepnosciOferty = dataUtworzeniaOferty.plusYears(1);
-        } else
-        {
-            this.dataKoncaDostepnosciOferty = dataUtworzeniaOferty.plusYears(2);
-        }
-        this.dataUtworzeniaOferty = dataUtworzeniaOferty;
     }
 }

@@ -4,7 +4,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SprzetModemWiFi extends ObjectPlus {
+public class SprzetModemWiFi extends ObjectPlus implements Serializable {
     private static final long serialVersionUID = 017L;
 
     String model;
