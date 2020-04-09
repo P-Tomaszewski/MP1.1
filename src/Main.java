@@ -16,7 +16,32 @@ Ekstensja
  Met. klasowa
  Przesłonięcie, przeciążenie
     */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+
+        if(new File("DaneOfertSprzetuUslug").isFile())
+        {
+            try
+            {
+                //miejsce docelowe pliku w workspace
+                FileInputStream fileInput = new FileInputStream("DaneOfertSprzetuUslug");
+                ObjectInputStream streamInput = new ObjectInputStream(fileInput);
+                //odczyt z dysku do pliku "daneFirmowe"
+                ObjectPlus.odczytajEkstensje(streamInput);
+                streamInput.close();
+                fileInput.close();
+            }
+            catch(IOException i){
+                i.printStackTrace();
+                return;
+            }
+            catch(ClassNotFoundException c){
+                System.out.println("Nie znaleziono klasy.");
+                c.printStackTrace();
+                return;
+            }
+        }
+
+
         LocalDate date = LocalDate.now();
         SprzetModemWiFi sprzetModemWiFi = new SprzetModemWiFi("AsusXC190", "AWR12334",
                 120, 80);
@@ -50,7 +75,7 @@ Ekstensja
         //Atrybut pochodny
         System.out.println("Atrybut pochodny: " + oferta.getDataKoncaDostepnosciOferty());
 
-       // Atrybut z�o�ony
+       // Atrybut zlozony
         oferta2.addSprzetModemwiFi(sprzetModemWiFi1);
         System.out.println("Atrybut z�o�ony: " + oferta2.getSprzetModemWiFi().toString());
 
@@ -65,36 +90,30 @@ Ekstensja
         oferta.addSprzetModemwiFi(sprzetModemWiFi1);
         System.out.println("Sprzet w ofercie " + oferta.getName() + ":");
         for(SprzetModemWiFi s : oferta.getSprzetModemWiFi()){
-            System.out.println(s.toString()); //Przes�oni�ta metoda toString()
+            System.out.println(s.toString()); //przeslonieta metoda toString()
         }
 
-        try{
-            //Zapisywanie do pliku
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("Ekstansja")));
-            Oferta.saveOferta(out);
-            SprzetModemWiFi.saveSprzetModemWiFis(out);
-            UslugaInternet.saveUslugaInternet(out);
-            out.close();
-            System.out.println("Ekstansje klas zapisane do pliku");
+        ObjectPlus.pokazEkstensje(Oferta.class);
 
-            //Odczytywanie z pliku
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("Ekstansja")));
-            Oferta.readOferta(in);
-            SprzetModemWiFi.readSprzetModemWiFis(in);
-            UslugaInternet.readUslugaInternet(in);
-            in.close();
-            System.out.println("Ekstansje klas wczytane z pliku.");
-        } catch (FileNotFoundException ex){
-            System.out.println("Plik nie został odnaleziony.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        try
+        {
+            //miejsce docelowe pliku w workspace
+            //zapis z dysku do pliku "daneFirmowe"
+            FileOutputStream fileOutput = new FileOutputStream("DaneOfertSprzetuUslug");
+            ObjectOutputStream StreamOutput = new ObjectOutputStream(fileOutput);
+            ObjectPlus.zapiszEkstensje(StreamOutput);
+            StreamOutput.close();
+            fileOutput.close();
+        }
+        catch(IOException i)
+        {
+            i.printStackTrace();
         }
 
         System.out.println("Ekstensja klasy Oferta po dodaniu sprzetu:");
         Oferta.printOferty(null);
         System.out.println();
+
 
     }
 

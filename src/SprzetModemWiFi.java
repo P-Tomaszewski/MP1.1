@@ -4,7 +4,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SprzetModemWiFi implements Serializable {
+public class SprzetModemWiFi extends ObjectPlus {
     private static final long serialVersionUID = 017L;
 
     String model;
@@ -74,13 +74,5 @@ public class SprzetModemWiFi implements Serializable {
         for(SprzetModemWiFi s : sprzetModemWiFis){
             System.out.println(s.toString());
         }
-    }
-
-    public static void saveSprzetModemWiFis(ObjectOutputStream stream) throws IOException {
-        stream.writeObject(sprzetModemWiFis);
-    }
-
-    public static void readSprzetModemWiFis(ObjectInputStream stream) throws IOException, ClassNotFoundException{
-        sprzetModemWiFis = (ArrayList<SprzetModemWiFi>) stream.readObject();
     }
 }

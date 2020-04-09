@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public  class Oferta  implements Serializable {
+public  class Oferta extends ObjectPlus {
 
     private static final long serialVersionUID = 007L;
     private String name;
@@ -132,13 +132,6 @@ public  class Oferta  implements Serializable {
         }
     }
 
-    public static void saveOferta(ObjectOutputStream stream) throws IOException {
-        stream.writeObject(oferty);
-    }
-
-    public static void readOferta(ObjectInputStream stream) throws IOException, ClassNotFoundException{
-        oferty = (ArrayList<Oferta>) stream.readObject();
-    }
 
     public String toString(){
         StringBuilder result = new StringBuilder();

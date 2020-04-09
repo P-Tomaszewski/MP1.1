@@ -4,7 +4,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UslugaInternet implements Serializable {
+public class UslugaInternet extends ObjectPlus {
 
     private static final long serialVersionUID = 217L;
     String pakietDanychWGb;
@@ -54,13 +54,5 @@ public class UslugaInternet implements Serializable {
         for(UslugaInternet s : uslugaInternets){
             System.out.println(s.toString());
         }
-    }
-
-    public static void saveUslugaInternet(ObjectOutputStream stream) throws IOException {
-        stream.writeObject(uslugaInternets);
-    }
-
-    public static void readUslugaInternet(ObjectInputStream stream) throws IOException, ClassNotFoundException{
-        uslugaInternets = (ArrayList<UslugaInternet>) stream.readObject();
     }
 }
