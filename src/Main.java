@@ -7,14 +7,14 @@ public class Main {
 
     /*
 Ekstensja
- Ekst. - trwałość
- Atr. złożony
- Atr. opcjonalny
- Atr. powt.
- Atr. klasowy
- Atr. pochodny
+ Ekst. - trwałość +
+ Atr. złożony +
+ Atr. opcjonalny +
+ Atr. powt. +
+ Atr. klasowy +
+ Atr. pochodny +
  Met. klasowa
- Przesłonięcie, przeciążenie
+ Przesłonięcie, przeciążenie + 
     */
     public static void main(String[] args) throws Exception {
 
@@ -41,7 +41,6 @@ Ekstensja
             }
         }
 
-
         LocalDate date = LocalDate.now();
         SprzetModemWiFi sprzetModemWiFi = new SprzetModemWiFi("AsusXC190", "AWR12334",
                 120, 80);
@@ -53,17 +52,6 @@ Ekstensja
                 12);
         Oferta oferta2 = new Oferta("Oferta zwykła", "Oferta klasyczna", date,
                 24, uslugaInternet);
-        System.out.println("Ekstensja klasy Sprzet: ");
-        SprzetModemWiFi.printSprzetModemWiFi();
-        System.out.println();
-
-        System.out.println("Ekstensja klasy Usluga: ");
-        UslugaInternet.printUslugaInternet();
-        System.out.println();
-
-        System.out.println("Ekstensja klasy Oferta:");
-        Oferta.printOferty(null);
-        System.out.println();
 
         //Atrybut klasowy
         Oferta.setGrupaDocelowa("Firma");
@@ -94,14 +82,12 @@ Ekstensja
         }
 
         ObjectPlus.pokazEkstensje(Oferta.class);
-
         ObjectPlus.pokazEkstensje(SprzetModemWiFi.class);
         ObjectPlus.pokazEkstensje(UslugaInternet.class);
 
         try
         {
-            //miejsce docelowe pliku w workspace
-            //zapis z dysku do pliku "daneFirmowe"
+            //zapis z dysku do pliku "DaneOfertSprzetuUslug"
             FileOutputStream fileOutput = new FileOutputStream("DaneOfertSprzetuUslug");
             ObjectOutputStream StreamOutput = new ObjectOutputStream(fileOutput);
             ObjectPlus.zapiszEkstensje(StreamOutput);

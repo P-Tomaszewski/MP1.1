@@ -1,6 +1,4 @@
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -49,30 +47,12 @@ public class SprzetModemWiFi extends ObjectPlus implements Serializable {
     public SprzetModemWiFi(String model, String nrSeryjny, int predkoscMax, int predkoscMin) {
        setModel(model);
        setNrSeryjny(nrSeryjny);
-        setPredkoscMin(predkoscMin);
+       setPredkoscMin(predkoscMin);
        setPredkoscMax(predkoscMax);
-       addSprzetModemWiFi(this);
     }
 
     public String toString(){
         return "Model: "+ model + " Numer seryjny: " + nrSeryjny+ " predkosc min: " + predkoscMin+"Mb/s predkosc max: " + predkoscMax+"Mb/s";
     }
 
-    private static void addSprzetModemWiFi(SprzetModemWiFi sprzetModemWiFi){
-        if(sprzetModemWiFis == null){
-            sprzetModemWiFis = new ArrayList<>();
-        }
-        sprzetModemWiFis.add(sprzetModemWiFi);
-    }
-    public static void removeSprzetModemWiFi(SprzetModemWiFi sprzetModemWiFi){
-        if(sprzetModemWiFis != null){
-            sprzetModemWiFis.remove(sprzetModemWiFi);
-        }
-    }
-
-    public static void printSprzetModemWiFi(){
-        for(SprzetModemWiFi s : sprzetModemWiFis){
-            System.out.println(s.toString());
-        }
-    }
 }
