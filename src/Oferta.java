@@ -85,63 +85,6 @@ public  class Oferta extends ObjectPlus implements Serializable{
         this.dataUtworzeniaOferty = dataUtworzeniaOferty;
     }
 
-    private static void addOferta(Oferta oferta){
-        if(oferty == null){
-            oferty = new ArrayList<Oferta>();
-        }
-        oferty.add(oferta);
-    }
-    public static void removeOferta(Oferta oferta){
-        if(oferty != null){
-            oferty.remove(oferta);
-        }
-    }
-    public static void printOferty(String param){
-        if(param == null){
-            for(Oferta h : oferty){
-                System.out.println(h.toString());
-            }
-        }
-        else if(param == "name"){
-            for(Oferta h : oferty){
-                System.out.println(h.getName());
-            }
-        }
-        else if(param == "descript"){
-            for(Oferta h : oferty){
-                System.out.println(h.getDescript());
-            }
-        }
-        else if(param == "dataUtworzeniaOferty"){
-            for(Oferta h : oferty){
-                System.out.println(h.getDataUtworzeniaOferty());
-            }
-        }
-        else if(param == "dataKoncaDostepnosciOferty"){
-            for(Oferta h : oferty){
-                System.out.println(h.getDataKoncaDostepnosciOferty());
-            }
-        }
-        else if(param == "okresZobowiazania"){
-            for(Oferta h : oferty){
-                System.out.println(h.getOkresZobowiazania());
-            }
-        }
-        else if(param == "uslugaInternet"){
-            for(Oferta h : oferty){
-                if(h.getUslugaInternet() != null)
-                    System.out.println(h.getUslugaInternet());
-            }
-        }
-        else if(param == "sprzetModemWiFi"){
-            for(Oferta h : oferty){
-                if(h.getSprzetModemWiFi() != null)
-                    System.out.println(h.getSprzetModemWiFi());
-            }
-        }
-    }
-
-
     public String toString(){
         StringBuilder result = new StringBuilder();
         result.append("Nazwa oferty: " + getName() + ", ");
@@ -161,7 +104,6 @@ public  class Oferta extends ObjectPlus implements Serializable{
         setDataUtworzeniaOferty(dataUtworzeniaOferty);
         setOkresZobowiazania(okresZobowiazania);
         this.sprzetModemWiFi = new ArrayList<>();
-        addOferta(this);
     }
 
     public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
@@ -172,6 +114,5 @@ public  class Oferta extends ObjectPlus implements Serializable{
         setOkresZobowiazania(okresZobowiazania);
         setUslugaInternet(uslugaInternet);
         this.sprzetModemWiFi = new ArrayList<>();
-        addOferta(this);
     }
 }
