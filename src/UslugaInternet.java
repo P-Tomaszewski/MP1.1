@@ -1,9 +1,12 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UslugaInternet {
+public class UslugaInternet implements Serializable {
+
+    private static final long serialVersionUID = 217L;
     String pakietDanychWGb;
     double cena;
 
@@ -27,11 +30,12 @@ public class UslugaInternet {
 
     public UslugaInternet(String pakietDanychWGb, double cena) {
         setCena(cena);
-       setPakietDanychWGb(pakietDanychWGb);
+        setPakietDanychWGb(pakietDanychWGb);
+        addUslugaInternet(this);
     }
 
     public String toString(){
-        return pakietDanychWGb + "Gb"+ " " + cena+ "zl";
+        return "pakiet danych: " + pakietDanychWGb + "Gb cena: " + cena+ "zl";
     }
 
     private static void addUslugaInternet(UslugaInternet uslugaInternet){
@@ -55,7 +59,7 @@ public class UslugaInternet {
     public static void saveUslugaInternet(ObjectOutputStream stream) throws IOException {
         stream.writeObject(uslugaInternets);
     }
-    @SuppressWarnings("unchecked")
+
     public static void readUslugaInternet(ObjectInputStream stream) throws IOException, ClassNotFoundException{
         uslugaInternets = (ArrayList<UslugaInternet>) stream.readObject();
     }

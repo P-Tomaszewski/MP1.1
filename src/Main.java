@@ -1,4 +1,4 @@
-import sun.util.resources.LocaleData;
+
 
 import java.io.*;
 import java.time.LocalDate;
@@ -6,7 +6,6 @@ import java.time.LocalDate;
 public class Main {
 
     /*
-    PREZ4
 Ekstensja
  Ekst. - trwałość
  Atr. złożony
@@ -18,28 +17,32 @@ Ekstensja
  Przesłonięcie, przeciążenie
     */
     public static void main(String[] args) {
-
+        LocalDate date = LocalDate.now();
         SprzetModemWiFi sprzetModemWiFi = new SprzetModemWiFi("AsusXC190", "AWR12334",
                 120, 80);
         SprzetModemWiFi sprzetModemWiFi1 = new SprzetModemWiFi("AsusXC170", "AWT33321",
                 200, 100);
-
         UslugaInternet uslugaInternet = new UslugaInternet("10", 20);
         UslugaInternet uslugaInternet1 = new UslugaInternet("20", 25);
+        Oferta oferta = new Oferta("Oferta Noworoczna", "Oferta na nowy rok", date,
+                12);
+        Oferta oferta2 = new Oferta("Oferta zwykła", "Oferta klasyczna", date,
+                24, uslugaInternet);
+        System.out.println("Ekstensja klasy Sprzet: ");
+        SprzetModemWiFi.printSprzetModemWiFi();
+        System.out.println();
 
-        LocalDate date = LocalDate.now();
+        System.out.println("Ekstensja klasy Usluga: ");
+        UslugaInternet.printUslugaInternet();
+        System.out.println();
 
-        Oferta oferta = new Oferta("Oferta Noworoczna", "Oferta na nowy rok", date,12, sprzetModemWiFi);
-
-
-        //Wy�wietlanie ekstensji koni - metoda bez parametru
-        System.out.println("Ekstensja klasy Horse:");
-      //  Oferta.printOferty(null);
+        System.out.println("Ekstensja klasy Oferta:");
+        Oferta.printOferty(null);
         System.out.println();
 
         //Atrybut klasowy
-//        Oferta.setStableName("The Horse Kingdom");
-//        System.out.println("Atrybut klasowy: " + Horse.getStableName());
+        Oferta.setGrupaDocelowa("Firma");
+        System.out.println("Atrybut klasowy: " + Oferta.getGrupaDocelowa());
 
         //Atrybut prosty
         System.out.println("Atrybut prosty: " + oferta.getName());
@@ -47,51 +50,51 @@ Ekstensja
         //Atrybut pochodny
         System.out.println("Atrybut pochodny: " + oferta.getDataKoncaDostepnosciOferty());
 
-        //Atrybut z�o�ony
-//        horse2.setDefaultRider(rider3);
-//        System.out.println("Atrybut z�o�ony: " + horse2.getDefaultRider().toString());
+       // Atrybut z�o�ony
+        oferta2.addSprzetModemwiFi(sprzetModemWiFi1);
+        System.out.println("Atrybut z�o�ony: " + oferta2.getSprzetModemWiFi().toString());
 
         //Atrybut opcjonalny
-//        System.out.println("Atrybut opcjonalny:");
-//        System.out.println("Ko� " + horse1.getName() + " nie ma obje�d�aj�cego: " + horse1.getDefaultRider());
-//        System.out.println("Ko� " + horse3.getName() + " ma obje�d�aj�cego: " + horse3.getDefaultRider().toString());
+        System.out.println("Atrybut opcjonalny:");
+        System.out.println("oferta  " + oferta.getName() + " nie ma uslugi w zestawie " + oferta.getUslugaInternet());
+        System.out.println("oferta  " + oferta2.getName() + " Pełna opcja uslugi i sprzet " + oferta2.getUslugaInternet().toString() + " " + oferta2.getSprzetModemWiFi().toString());
 
         //Atrybut powtarzalny
-//        System.out.println("Atrybut powtarzalny:");
-//        horse3.addDescendant(horse1);
-//        horse3.addDescendant(horse2);
-//        System.out.println("Potomkowie konia " + horse3.getName() + ":");
-//        for(Horse h : horse3.getDescendants()){
-//            System.out.println(h.toString()); //Przes�oni�ta metoda toString()
-//        }
-
-
+        System.out.println("Atrybut powtarzalny:");
+        oferta.addSprzetModemwiFi(sprzetModemWiFi);
+        oferta.addSprzetModemwiFi(sprzetModemWiFi1);
+        System.out.println("Sprzet w ofercie " + oferta.getName() + ":");
+        for(SprzetModemWiFi s : oferta.getSprzetModemWiFi()){
+            System.out.println(s.toString()); //Przes�oni�ta metoda toString()
+        }
 
         try{
             //Zapisywanie do pliku
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("BackupFile")));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("Ekstansja")));
             Oferta.saveOferta(out);
             SprzetModemWiFi.saveSprzetModemWiFis(out);
             UslugaInternet.saveUslugaInternet(out);
             out.close();
-            System.out.println("Ekstensje klas Rider i Horse zapisane do pliku.");
+            System.out.println("Ekstansje klas zapisane do pliku");
 
             //Odczytywanie z pliku
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("BackupFile")));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("Ekstansja")));
             Oferta.readOferta(in);
+            SprzetModemWiFi.readSprzetModemWiFis(in);
             UslugaInternet.readUslugaInternet(in);
             in.close();
-            System.out.println(oferta);
-            System.out.println("Ekstensje klas Rider i Horse wczytane z pliku.");
+            System.out.println("Ekstansje klas wczytane z pliku.");
         } catch (FileNotFoundException ex){
-            System.out.println("Plik nie zosta� odnaleziony.");
+            System.out.println("Plik nie został odnaleziony.");
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        System.out.println("Ekstensja klasy Oferta po dodaniu sprzetu:");
+        Oferta.printOferty(null);
+        System.out.println();
 
     }
 

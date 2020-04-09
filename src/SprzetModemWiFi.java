@@ -1,9 +1,12 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SprzetModemWiFi {
+public class SprzetModemWiFi implements Serializable {
+    private static final long serialVersionUID = 017L;
+
     String model;
     String nrSeryjny;
     int predkoscMax;
@@ -48,15 +51,16 @@ public class SprzetModemWiFi {
        setNrSeryjny(nrSeryjny);
         setPredkoscMin(predkoscMin);
        setPredkoscMax(predkoscMax);
+       addSprzetModemWiFi(this);
     }
 
     public String toString(){
-        return model + " " + nrSeryjny+ " " + predkoscMin+"Mb/s " + predkoscMax+"Mb/s";
+        return "Model: "+ model + " Numer seryjny: " + nrSeryjny+ " predkosc min: " + predkoscMin+"Mb/s predkosc max: " + predkoscMax+"Mb/s";
     }
 
     private static void addSprzetModemWiFi(SprzetModemWiFi sprzetModemWiFi){
         if(sprzetModemWiFis == null){
-            sprzetModemWiFis = new ArrayList<SprzetModemWiFi>();
+            sprzetModemWiFis = new ArrayList<>();
         }
         sprzetModemWiFis.add(sprzetModemWiFi);
     }
@@ -75,7 +79,7 @@ public class SprzetModemWiFi {
     public static void saveSprzetModemWiFis(ObjectOutputStream stream) throws IOException {
         stream.writeObject(sprzetModemWiFis);
     }
-    @SuppressWarnings("unchecked")
+
     public static void readSprzetModemWiFis(ObjectInputStream stream) throws IOException, ClassNotFoundException{
         sprzetModemWiFis = (ArrayList<SprzetModemWiFi>) stream.readObject();
     }

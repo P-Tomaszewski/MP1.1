@@ -1,4 +1,4 @@
-import sun.util.resources.LocaleData;
+
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -8,19 +8,29 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public  class Oferta  implements Serializable {
+
+    private static final long serialVersionUID = 007L;
     private String name;
     private String descript;
     private LocalDate dataUtworzeniaOferty;
-    private int okresZobowiazania; //12 lub 24 miesiace ZMIENIC NA ENUM
+    private int okresZobowiazania;
     private LocalDate dataKoncaDostepnosciOferty; //atr. pochodny z dataUtworzenia
     private UslugaInternet uslugaInternet; //atr. zlozony i opcjonalny
-    private SprzetModemWiFi sprzetModemWiFi; //atr. zlozony i opcjonalny
+    private ArrayList<SprzetModemWiFi> sprzetModemWiFi; //atr. powtarzalny i opcjonalny
+
     private static ArrayList<Oferta> oferty; // ekstansja klasy
+    private static String grupaDocelowa; //atr.klasowy
+
+    public static String getGrupaDocelowa() {
+        return grupaDocelowa; }
+
+    public static void setGrupaDocelowa(String grupaDocelowa) {
+        Oferta.grupaDocelowa = grupaDocelowa;
+    }
 
     public LocalDate getDataKoncaDostepnosciOferty() {
         return dataKoncaDostepnosciOferty;
     }
-
 
     public int getOkresZobowiazania() {
         return okresZobowiazania;
@@ -38,14 +48,17 @@ public  class Oferta  implements Serializable {
         this.uslugaInternet = uslugaInternet;
     }
 
-    public SprzetModemWiFi getSprzetModemWiFi() {
-        return sprzetModemWiFi;
+    public ArrayList<SprzetModemWiFi> getSprzetModemWiFi(){
+        return this.sprzetModemWiFi;
     }
 
-    public void setSprzetModemWiFi(SprzetModemWiFi sprzetModemWiFi) {
-        this.sprzetModemWiFi = sprzetModemWiFi;
+    public void addSprzetModemwiFi(SprzetModemWiFi sprzetModemWiFi){
+        this.sprzetModemWiFi.add(sprzetModemWiFi);
     }
 
+    public void removeSrzetModemWiFi(SprzetModemWiFi sprzetModemWiFi){
+        this.sprzetModemWiFi.remove(sprzetModemWiFi);
+    }
 
     public String getName() {
         return name;
@@ -64,7 +77,7 @@ public  class Oferta  implements Serializable {
     }
 
     private static void addOferta(Oferta oferta){
-        if(oferta == null){
+        if(oferty == null){
             oferty = new ArrayList<Oferta>();
         }
         oferty.add(oferta);
@@ -122,31 +135,31 @@ public  class Oferta  implements Serializable {
     public static void saveOferta(ObjectOutputStream stream) throws IOException {
         stream.writeObject(oferty);
     }
-    @SuppressWarnings("unchecked")
+
     public static void readOferta(ObjectInputStream stream) throws IOException, ClassNotFoundException{
         oferty = (ArrayList<Oferta>) stream.readObject();
     }
 
     public String toString(){
         StringBuilder result = new StringBuilder();
-        result.append("Oferta: " + getName() + ", ");
+        result.append("Nazwa oferty: " + getName() + ", ");
         result.append("Opis:  " + getDescript() + " ");
         if(getUslugaInternet() != null){
             result.append("Usluga: " + getUslugaInternet().toString());
         }
         if(getSprzetModemWiFi() != null){
-            result.append("Sprzet: " +getSprzetModemWiFi().toString());
+            result.append(" Sprzet: " +getSprzetModemWiFi().toString());
         }
         return result.toString();
     }
 
-    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
-                  SprzetModemWiFi sprzetModemWiFi) {
+    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania) {
         setName(name);
         setDescript(descript);
         setDataUtworzeniaOferty(dataUtworzeniaOferty);
         setOkresZobowiazania(okresZobowiazania);
-        setSprzetModemWiFi(sprzetModemWiFi);
+        this.sprzetModemWiFi = new ArrayList<>();
+        addOferta(this);
     }
 
     public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
@@ -156,16 +169,8 @@ public  class Oferta  implements Serializable {
         setDataUtworzeniaOferty(dataUtworzeniaOferty);
         setOkresZobowiazania(okresZobowiazania);
         setUslugaInternet(uslugaInternet);
-    }
-
-    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
-                   UslugaInternet uslugaInternet, SprzetModemWiFi sprzetModemWiFi) {
-        setName(name);
-        setDescript(descript);
-        setDataUtworzeniaOferty(dataUtworzeniaOferty);
-        setOkresZobowiazania(okresZobowiazania);
-        setUslugaInternet(uslugaInternet);
-        setSprzetModemWiFi(sprzetModemWiFi);
+        this.sprzetModemWiFi = new ArrayList<>();
+        addOferta(this);
     }
 
     public LocalDate getDataUtworzeniaOferty() {
@@ -181,10 +186,4 @@ public  class Oferta  implements Serializable {
         }
         this.dataUtworzeniaOferty = dataUtworzeniaOferty;
     }
-
-
-
-
-
-
 }
