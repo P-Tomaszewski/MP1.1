@@ -25,7 +25,7 @@ Ekstensja
                 FileInputStream fileInput = new FileInputStream("DaneOfertSprzetuUslug");
                 ObjectInputStream streamInput = new ObjectInputStream(fileInput);
                 //odczyt z dysku do pliku "daneFirmowe"
-                ObjectPlus.odczytajEkstensje(streamInput);
+                ObjectPlus.readEkstansja(streamInput);
                 streamInput.close();
                 fileInput.close();
             }
@@ -41,59 +41,59 @@ Ekstensja
         }
 
         LocalDate date = LocalDate.now();
-        SprzetModemWiFi sprzetModemWiFi = new SprzetModemWiFi("AsusXC190", "AWR12334",
+        EquipmentModemWiFi equipmentModemWiFi = new EquipmentModemWiFi("AsusXC190", "AWR12334",
                 120, 80);
-        SprzetModemWiFi sprzetModemWiFi1 = new SprzetModemWiFi("AsusXC170", "AWT33321",
+        EquipmentModemWiFi equipmentModemWiFi1 = new EquipmentModemWiFi("AsusXC170", "AWT33321",
                 200, 100);
-        UslugaInternet uslugaInternet = new UslugaInternet("10", 20);
-        UslugaInternet uslugaInternet1 = new UslugaInternet("20", 25);
-        Oferta oferta = new Oferta("Oferta Noworoczna", "Oferta na nowy rok", date,
+        InternetService internetService = new InternetService("10", 20);
+        InternetService internetService1 = new InternetService("20", 25);
+        Offer offer = new Offer("Oferta Noworoczna", "Oferta na nowy rok", date,
                 12);
-        Oferta oferta2 = new Oferta("Oferta zwykła", "Oferta klasyczna", date,
-                24, uslugaInternet);
+        Offer offer2 = new Offer("Oferta zwykła", "Oferta klasyczna", date,
+                24, internetService);
 
-        Oferta oferta3 = new Oferta("Oferta wyjatkowa", "To jest miejsce na opis","Patryk Tomaszewski", date,
-                24, uslugaInternet); //przeciazony opis.
+        Offer offer3 = new Offer("Oferta wyjatkowa", "To jest miejsce na opis","Patryk Tomaszewski", date,
+                24, internetService); //przeciazony opis.
 
         //Atrybut klasowy
-        Oferta.setGrupaDocelowa("Firma");
-        System.out.println("Atrybut klasowy: " + Oferta.getGrupaDocelowa());
+        Offer.setGrupaDocelowa("Firma");
+        System.out.println("Atrybut klasowy: " + Offer.getGrupaDocelowa());
 
         //Atrybut prosty
-        System.out.println("Atrybut prosty: " + oferta.getNazwa());
+        System.out.println("Atrybut prosty: " + offer.getName());
 
         //Atrybut pochodny
-        System.out.println("Atrybut pochodny: " + oferta.getDataKoncaDostepnosciOferty());
+        System.out.println("Atrybut pochodny: " + offer.getOfferAvailabilityEndDate());
 
        // Atrybut zlozony
-        oferta2.addSprzetModemwiFi(sprzetModemWiFi1);
-        System.out.println("Atrybut zlozony: " + oferta2.getSprzetModemWiFi().toString());
-        oferta3.addSprzetModemwiFi(sprzetModemWiFi);
+        offer2.addSprzetModemwiFi(equipmentModemWiFi1);
+        System.out.println("Atrybut zlozony: " + offer2.getEquipmentModemWiFi().toString());
+        offer3.addSprzetModemwiFi(equipmentModemWiFi);
         //Atrybut opcjonalny
         System.out.println("Atrybut opcjonalny:");
-        System.out.println("oferta  " + oferta.getNazwa() + " nie ma uslugi w zestawie " + oferta.getUslugaInternet());
-        System.out.println("oferta  " + oferta2.getNazwa() + " Pełna opcja uslugi i sprzet " + oferta2.getUslugaInternet().toString() + " " + oferta2.getSprzetModemWiFi().toString());
+        System.out.println("oferta  " + offer.getName() + " nie ma uslugi w zestawie " + offer.getUslugaInternet());
+        System.out.println("oferta  " + offer2.getName() + " Pełna opcja uslugi i sprzet " + offer2.getUslugaInternet().toString() + " " + offer2.getEquipmentModemWiFi().toString());
         //Przeciazenie metody dla opisu.
-        System.out.println("oferta" + oferta3.getNazwa() + oferta3.getOpis());
+        System.out.println("oferta" + offer3.getName() + offer3.getDescript());
         //Atrybut powtarzalny
         System.out.print("Atrybut powtarzalny, ");
-        oferta.addSprzetModemwiFi(sprzetModemWiFi);
-        oferta.addSprzetModemwiFi(sprzetModemWiFi1);
-        System.out.println("Sprzet w ofercie " + oferta.getNazwa() + ":");
-        for(SprzetModemWiFi s : oferta.getSprzetModemWiFi()){
+        offer.addSprzetModemwiFi(equipmentModemWiFi);
+        offer.addSprzetModemwiFi(equipmentModemWiFi1);
+        System.out.println("Sprzet w ofercie " + offer.getName() + ":");
+        for(EquipmentModemWiFi s : offer.getEquipmentModemWiFi()){
             System.out.println(s.toString()); //przeslonieta metoda toString()
         }
 
-        ObjectPlus.pokazEkstensje(Oferta.class);
-        ObjectPlus.pokazEkstensje(SprzetModemWiFi.class);
-        ObjectPlus.pokazEkstensje(UslugaInternet.class);
+        ObjectPlus.showEkstansja(Offer.class);
+        ObjectPlus.showEkstansja(EquipmentModemWiFi.class);
+        ObjectPlus.showEkstansja(InternetService.class);
 
         try
         {
             //zapis z dysku do pliku "DaneOfertSprzetuUslug"
             FileOutputStream fileOutput = new FileOutputStream("DaneOfertSprzetuUslug");
             ObjectOutputStream StreamOutput = new ObjectOutputStream(fileOutput);
-            ObjectPlus.zapiszEkstensje(StreamOutput);
+            ObjectPlus.saveEkstansja(StreamOutput);
             StreamOutput.close();
             fileOutput.close();
         }

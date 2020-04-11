@@ -27,17 +27,17 @@ public class ObjectPlus implements Serializable
         ekstensja.add(this);
     }
 
-    public static void zapiszEkstensje(ObjectOutputStream stream) throws IOException
+    public static void saveEkstansja(ObjectOutputStream stream) throws IOException
     {
         stream.writeObject(ekstensje);
     }
 
-    public static void odczytajEkstensje(ObjectInputStream stream) throws IOException, ClassNotFoundException
+    public static void readEkstansja(ObjectInputStream stream) throws IOException, ClassNotFoundException
     {
         ekstensje = (Hashtable<Class<? extends ObjectPlus>, Vector<ObjectPlus>>) stream.readObject();
     }
 
-    public static void pokazEkstensje(Class<? extends ObjectPlus> klasa) throws Exception
+    public static void showEkstansja(Class<? extends ObjectPlus> klasa) throws Exception
     {
         Vector<ObjectPlus> ekstensja = null;
 

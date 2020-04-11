@@ -2,13 +2,13 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UslugaInternet extends ObjectPlus implements Serializable {
+public class InternetService extends ObjectPlus implements Serializable {
 
     private static final long serialVersionUID = 217L;
     String pakietDanychWGb;
     double cena;
 
-    private static ArrayList<UslugaInternet> uslugaInternets;
+    private static ArrayList<InternetService> uslugaInternets;
 
     public String getPakietDanychWGb() {
         return pakietDanychWGb;
@@ -26,7 +26,7 @@ public class UslugaInternet extends ObjectPlus implements Serializable {
         this.cena = cena;
     }
 
-    public UslugaInternet(String pakietDanychWGb, double cena) {
+    public InternetService(String pakietDanychWGb, double cena) {
         setCena(cena);
         setPakietDanychWGb(pakietDanychWGb);
     }
