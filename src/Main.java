@@ -4,7 +4,6 @@ import java.io.*;
 import java.time.LocalDate;
 
 public class Main {
-
     /*
 Ekstensja
  Ekst. - trwałość +
@@ -13,7 +12,7 @@ Ekstensja
  Atr. powt. +
  Atr. klasowy +
  Atr. pochodny +
- Met. klasowa
+ Met. klasowa +
  Przesłonięcie, przeciążenie + 
     */
     public static void main(String[] args) throws Exception {
@@ -53,12 +52,15 @@ Ekstensja
         Oferta oferta2 = new Oferta("Oferta zwykła", "Oferta klasyczna", date,
                 24, uslugaInternet);
 
+        Oferta oferta3 = new Oferta("Oferta wyjatkowa", "To jest miejsce na opis","Patryk Tomaszewski", date,
+                24, uslugaInternet); //przeciazony opis.
+
         //Atrybut klasowy
         Oferta.setGrupaDocelowa("Firma");
         System.out.println("Atrybut klasowy: " + Oferta.getGrupaDocelowa());
 
         //Atrybut prosty
-        System.out.println("Atrybut prosty: " + oferta.getName());
+        System.out.println("Atrybut prosty: " + oferta.getNazwa());
 
         //Atrybut pochodny
         System.out.println("Atrybut pochodny: " + oferta.getDataKoncaDostepnosciOferty());
@@ -66,17 +68,18 @@ Ekstensja
        // Atrybut zlozony
         oferta2.addSprzetModemwiFi(sprzetModemWiFi1);
         System.out.println("Atrybut zlozony: " + oferta2.getSprzetModemWiFi().toString());
-
+        oferta3.addSprzetModemwiFi(sprzetModemWiFi);
         //Atrybut opcjonalny
         System.out.println("Atrybut opcjonalny:");
-        System.out.println("oferta  " + oferta.getName() + " nie ma uslugi w zestawie " + oferta.getUslugaInternet());
-        System.out.println("oferta  " + oferta2.getName() + " Pełna opcja uslugi i sprzet " + oferta2.getUslugaInternet().toString() + " " + oferta2.getSprzetModemWiFi().toString());
-
+        System.out.println("oferta  " + oferta.getNazwa() + " nie ma uslugi w zestawie " + oferta.getUslugaInternet());
+        System.out.println("oferta  " + oferta2.getNazwa() + " Pełna opcja uslugi i sprzet " + oferta2.getUslugaInternet().toString() + " " + oferta2.getSprzetModemWiFi().toString());
+        //Przeciazenie metody dla opisu.
+        System.out.println("oferta" + oferta3.getNazwa() + oferta3.getOpis());
         //Atrybut powtarzalny
         System.out.print("Atrybut powtarzalny, ");
         oferta.addSprzetModemwiFi(sprzetModemWiFi);
         oferta.addSprzetModemwiFi(sprzetModemWiFi1);
-        System.out.println("Sprzet w ofercie " + oferta.getName() + ":");
+        System.out.println("Sprzet w ofercie " + oferta.getNazwa() + ":");
         for(SprzetModemWiFi s : oferta.getSprzetModemWiFi()){
             System.out.println(s.toString()); //przeslonieta metoda toString()
         }
@@ -94,12 +97,9 @@ Ekstensja
             StreamOutput.close();
             fileOutput.close();
         }
-        catch(IOException i)
-        {
+        catch(IOException i) {
             i.printStackTrace();
         }
-
-
 
 
     }
