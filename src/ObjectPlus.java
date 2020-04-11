@@ -34,12 +34,12 @@ public class ObjectPlus implements Serializable
 
     public static void readEkstansja(ObjectInputStream stream) throws IOException, ClassNotFoundException
     {
-        ekstensje = (Hashtable<Class<? extends ObjectPlus>, Vector<ObjectPlus>>) stream.readObject();
+        ekstensje = (Hashtable) stream.readObject();
     }
 
-    public static void showEkstansja(Class<? extends ObjectPlus> klasa) throws Exception
+    public static void showEkstansja(Class klasa) throws Exception
     {
-        Vector<ObjectPlus> ekstensja = null;
+        Vector ekstensja = null;
 
         if(ekstensje.containsKey(klasa))
         {

@@ -1,14 +1,10 @@
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class EquipmentModemWiFi extends Equipment implements Serializable {
     private static final long serialVersionUID = 017L;
     int maxSpeed;
     int minSpeed;
-
-    private static ArrayList<EquipmentModemWiFi> sprzetModemWiFis;
-
 
     public int getMaxSpeed() {
         return maxSpeed;

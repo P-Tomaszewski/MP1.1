@@ -1,36 +1,33 @@
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class InternetService extends ObjectPlus implements Serializable {
 
     private static final long serialVersionUID = 217L;
-    String pakietDanychWGb;
-    double cena;
+    String dataPacketGb;
+    double price;
 
-    private static ArrayList<InternetService> uslugaInternets;
-
-    public String getPakietDanychWGb() {
-        return pakietDanychWGb;
+    public String getDataPacketGb() {
+        return dataPacketGb;
     }
 
-    public void setPakietDanychWGb(String pakietDanychWGb) {
-        this.pakietDanychWGb = pakietDanychWGb;
+    public void setDataPacketGb(String dataPacketGb) {
+        this.dataPacketGb = dataPacketGb;
     }
 
-    public double getCena() {
-        return cena;
+    public double getPrice() {
+        return price;
     }
 
-    public void setCena(double cena) {
-        this.cena = cena;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public InternetService(String pakietDanychWGb, double cena) {
-        setCena(cena);
-        setPakietDanychWGb(pakietDanychWGb);
+    public InternetService(String dataPacketGb, double price) {
+        setPrice(price);
+        setDataPacketGb(dataPacketGb);
     }
     public String toString(){
-        return "pakiet danych: " + pakietDanychWGb + "Gb cena: " + cena+ "zl";
+        return "pakiet danych: " + dataPacketGb + "Gb cena: " + price + "zl";
     }
 }

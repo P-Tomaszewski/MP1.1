@@ -17,10 +17,8 @@ Ekstensja
     */
     public static void main(String[] args) throws Exception {
 
-        if(new File("DaneOfertSprzetuUslug").isFile())
-        {
-            try
-            {
+        if (new File("DaneOfertSprzetuUslug").isFile()) {
+            try {
                 //miejsce docelowe pliku w workspace
                 FileInputStream fileInput = new FileInputStream("DaneOfertSprzetuUslug");
                 ObjectInputStream streamInput = new ObjectInputStream(fileInput);
@@ -28,12 +26,10 @@ Ekstensja
                 ObjectPlus.readEkstansja(streamInput);
                 streamInput.close();
                 fileInput.close();
-            }
-            catch(IOException i){
+            } catch (IOException i) {
                 i.printStackTrace();
                 return;
-            }
-            catch(ClassNotFoundException c){
+            } catch (ClassNotFoundException c) {
                 System.out.println("Nie znaleziono klasy.");
                 c.printStackTrace();
                 return;
@@ -52,12 +48,12 @@ Ekstensja
         Offer offer2 = new Offer("Oferta zwykła", "Oferta klasyczna", date,
                 24, internetService);
 
-        Offer offer3 = new Offer("Oferta wyjatkowa", "To jest miejsce na opis","Patryk Tomaszewski", date,
+        Offer offer3 = new Offer("Oferta wyjatkowa", "To jest miejsce na opis", "Patryk Tomaszewski", date,
                 24, internetService); //przeciazony opis.
 
         //Atrybut klasowy
-        Offer.setGrupaDocelowa("Firma");
-        System.out.println("Atrybut klasowy: " + Offer.getGrupaDocelowa());
+        Offer.setTargetGroup("Firma");
+        System.out.println("Atrybut klasowy: " + Offer.getTargetGroup());
 
         //Atrybut prosty
         System.out.println("Atrybut prosty: " + offer.getName());
@@ -65,22 +61,22 @@ Ekstensja
         //Atrybut pochodny
         System.out.println("Atrybut pochodny: " + offer.getOfferAvailabilityEndDate());
 
-       // Atrybut zlozony
-        offer2.addSprzetModemwiFi(equipmentModemWiFi1);
+        // Atrybut zlozony
+        offer2.addEquipmentModemWiFi(equipmentModemWiFi1);
         System.out.println("Atrybut zlozony: " + offer2.getEquipmentModemWiFi().toString());
-        offer3.addSprzetModemwiFi(equipmentModemWiFi);
+        offer3.addEquipmentModemWiFi(equipmentModemWiFi);
         //Atrybut opcjonalny
         System.out.println("Atrybut opcjonalny:");
-        System.out.println("oferta  " + offer.getName() + " nie ma uslugi w zestawie " + offer.getUslugaInternet());
-        System.out.println("oferta  " + offer2.getName() + " Pełna opcja uslugi i sprzet " + offer2.getUslugaInternet().toString() + " " + offer2.getEquipmentModemWiFi().toString());
+        System.out.println("oferta  " + offer.getName() + " nie ma uslugi w zestawie " + offer.getInternetService());
+        System.out.println("oferta  " + offer2.getName() + " Pełna opcja uslugi i sprzet " + offer2.getInternetService().toString() + " " + offer2.getEquipmentModemWiFi().toString());
         //Przeciazenie metody dla opisu.
         System.out.println("oferta" + offer3.getName() + offer3.getDescript());
         //Atrybut powtarzalny
         System.out.print("Atrybut powtarzalny, ");
-        offer.addSprzetModemwiFi(equipmentModemWiFi);
-        offer.addSprzetModemwiFi(equipmentModemWiFi1);
+        offer.addEquipmentModemWiFi(equipmentModemWiFi);
+        offer.addEquipmentModemWiFi(equipmentModemWiFi1);
         System.out.println("Sprzet w ofercie " + offer.getName() + ":");
-        for(EquipmentModemWiFi s : offer.getEquipmentModemWiFi()){
+        for (EquipmentModemWiFi s : offer.getEquipmentModemWiFi()) {
             System.out.println(s.toString()); //przeslonieta metoda toString()
         }
 
@@ -88,20 +84,16 @@ Ekstensja
         ObjectPlus.showEkstansja(EquipmentModemWiFi.class);
         ObjectPlus.showEkstansja(InternetService.class);
 
-        try
-        {
+        try {
             //zapis z dysku do pliku "DaneOfertSprzetuUslug"
             FileOutputStream fileOutput = new FileOutputStream("DaneOfertSprzetuUslug");
             ObjectOutputStream StreamOutput = new ObjectOutputStream(fileOutput);
             ObjectPlus.saveEkstansja(StreamOutput);
             StreamOutput.close();
             fileOutput.close();
-        }
-        catch(IOException i) {
+        } catch (IOException i) {
             i.printStackTrace();
         }
-
-
     }
 
 }

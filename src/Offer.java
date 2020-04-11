@@ -8,34 +8,32 @@ public  class Offer extends ObjectPlus implements Serializable{
     private String name;
     private String descript;
     private LocalDate offerCreationDate;
-    private int commimentPeriod;
+    private int commitmentPeriod; //atr prosty okres zob.
     private LocalDate offerAvailabilityEndDate; //atr. pochodny z dataUtworzenia
     private InternetService internetService; //atr. zlozony i opcjonalny
     private ArrayList<EquipmentModemWiFi> equipmentModemWiFi; //atr. powtarzalny i opcjonalny
+    private static String targetGroup; //atr.klasowy
 
-    private static ArrayList<Offer> oferty; // ekstansja klasy
-    private static String grupaDocelowa; //atr.klasowy
+    public static String getTargetGroup() {
+        return targetGroup; }
 
-    public static String getGrupaDocelowa() {
-        return grupaDocelowa; }
-
-    public static void setGrupaDocelowa(String grupaDocelowa) {
-        Offer.grupaDocelowa = grupaDocelowa;
+    public static void setTargetGroup(String targetGroup) {
+        Offer.targetGroup = targetGroup;
     } //metoda klasowa
 
     public LocalDate getOfferAvailabilityEndDate() {
         return offerAvailabilityEndDate;
     }
 
-    public int getCommimentPeriod() {
-        return commimentPeriod;
+    public int getCommitmentPeriod() {
+        return commitmentPeriod;
     }
 
-    public void setCommimentPeriod(int commimentPeriod) {
-        this.commimentPeriod = commimentPeriod;
+    public void setCommitmentPeriod(int commitmentPeriod) {
+        this.commitmentPeriod = commitmentPeriod;
     }
 
-    public InternetService getUslugaInternet() {
+    public InternetService getInternetService() {
         return internetService;
     }
 
@@ -47,11 +45,11 @@ public  class Offer extends ObjectPlus implements Serializable{
         return this.equipmentModemWiFi;
     }
 
-    public void addSprzetModemwiFi(EquipmentModemWiFi equipmentModemWiFi){
+    public void addEquipmentModemWiFi(EquipmentModemWiFi equipmentModemWiFi){
         this.equipmentModemWiFi.add(equipmentModemWiFi);
     }
 
-    public void removeSrzetModemWiFi(EquipmentModemWiFi equipmentModemWiFi){
+    public void removeEquipmentModemWiFi(EquipmentModemWiFi equipmentModemWiFi){
         this.equipmentModemWiFi.remove(equipmentModemWiFi);
     }
 
@@ -73,14 +71,14 @@ public  class Offer extends ObjectPlus implements Serializable{
 
     public void setDescript(String descript, String author) {
         this.descript = descript + " created by " + author;
-    }
+    } // przeciazenie metody
 
     public LocalDate getOfferCreationDate() {
         return offerCreationDate;
     }
 
     public void setOfferCreationDate(LocalDate offerCreationDate) {
-        if(commimentPeriod == 12) {
+        if(commitmentPeriod == 12) {
             this.offerAvailabilityEndDate = offerCreationDate.plusYears(1);
         } else
         {
@@ -93,8 +91,8 @@ public  class Offer extends ObjectPlus implements Serializable{
         StringBuilder result = new StringBuilder();
         result.append("Nazwa oferty: " + getName() + ", ");
         result.append("Opis:  " + getDescript() + " ");
-        if(getUslugaInternet() != null){
-            result.append("Usluga: " + getUslugaInternet().toString());
+        if(getInternetService() != null){
+            result.append("Usluga: " + getInternetService().toString());
         }
         if(getEquipmentModemWiFi() != null){
             result.append(" Sprzet: " + getEquipmentModemWiFi().toString());
@@ -102,31 +100,30 @@ public  class Offer extends ObjectPlus implements Serializable{
         return result.toString();
     }
 
-
-    public Offer(String name, String descript, LocalDate offerCreationDate, int commimentPeriod) {
+    public Offer(String name, String descript, LocalDate offerCreationDate, int commitmentPeriod) {
         setName(name);
         setDescript(descript);
         setOfferCreationDate(offerCreationDate);
-        setCommimentPeriod(commimentPeriod);
+        setCommitmentPeriod(commitmentPeriod);
         this.equipmentModemWiFi = new ArrayList<>();
     }
 
-    public Offer(String name, String descript, LocalDate offerCreationDate, int commimentPeriod,
+    public Offer(String name, String descript, LocalDate offerCreationDate, int commitmentPeriod,
                  InternetService internetService) {
         setName(name);
         setDescript(descript);
         setOfferCreationDate(offerCreationDate);
-        setCommimentPeriod(commimentPeriod);
+        setCommitmentPeriod(commitmentPeriod);
         setInternetService(internetService);
         this.equipmentModemWiFi = new ArrayList<>();
     }
 
-    public Offer(String name, String descript, String author, LocalDate offerCreationDate, int commimentPeriod,
+    public Offer(String name, String descript, String author, LocalDate offerCreationDate, int commitmentPeriod,
                  InternetService internetService) {
         setName(name);
         setDescript(descript, author);
         setOfferCreationDate(offerCreationDate);
-        setCommimentPeriod(commimentPeriod);
+        setCommitmentPeriod(commitmentPeriod);
         setInternetService(internetService);
         this.equipmentModemWiFi = new ArrayList<>();
     }
