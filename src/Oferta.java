@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public  class Oferta extends ObjectPlus implements Serializable{
 
     private static final long serialVersionUID = 007L;
-    private String name;
-    private String descript;
+    private String nazwa;
+    private String opis;
     private LocalDate dataUtworzeniaOferty;
     private int okresZobowiazania;
     private LocalDate dataKoncaDostepnosciOferty; //atr. pochodny z dataUtworzenia
@@ -21,7 +21,7 @@ public  class Oferta extends ObjectPlus implements Serializable{
 
     public static void setGrupaDocelowa(String grupaDocelowa) {
         Oferta.grupaDocelowa = grupaDocelowa;
-    }
+    } //metoda klasowa
 
     public LocalDate getDataKoncaDostepnosciOferty() {
         return dataKoncaDostepnosciOferty;
@@ -55,20 +55,24 @@ public  class Oferta extends ObjectPlus implements Serializable{
         this.sprzetModemWiFi.remove(sprzetModemWiFi);
     }
 
-    public String getName() {
-        return name;
+    public String getNazwa() {
+        return nazwa;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNazwa(String nazwa) {
+        this.nazwa = nazwa;
     }
 
-    public String getDescript() {
-        return descript;
+    public String getOpis() {
+        return opis;
     }
 
-    public void setDescript(String descript) {
-        this.descript = descript;
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public void setDescript(String descript, String author) {
+        this.opis = descript + " created by " + author;
     }
 
     public LocalDate getDataUtworzeniaOferty() {
@@ -87,8 +91,8 @@ public  class Oferta extends ObjectPlus implements Serializable{
 
     public String toString(){
         StringBuilder result = new StringBuilder();
-        result.append("Nazwa oferty: " + getName() + ", ");
-        result.append("Opis:  " + getDescript() + " ");
+        result.append("Nazwa oferty: " + getNazwa() + ", ");
+        result.append("Opis:  " + getOpis() + " ");
         if(getUslugaInternet() != null){
             result.append("Usluga: " + getUslugaInternet().toString());
         }
@@ -98,18 +102,29 @@ public  class Oferta extends ObjectPlus implements Serializable{
         return result.toString();
     }
 
-    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania) {
-        setName(name);
-        setDescript(descript);
+
+    public Oferta(String nazwa, String opis, LocalDate dataUtworzeniaOferty, int okresZobowiazania) {
+        setNazwa(nazwa);
+        setOpis(opis);
         setDataUtworzeniaOferty(dataUtworzeniaOferty);
         setOkresZobowiazania(okresZobowiazania);
         this.sprzetModemWiFi = new ArrayList<>();
     }
 
-    public Oferta(String name, String descript, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
+    public Oferta(String nazwa, String opis, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
                   UslugaInternet uslugaInternet) {
-        setName(name);
-        setDescript(descript);
+        setNazwa(nazwa);
+        setOpis(opis);
+        setDataUtworzeniaOferty(dataUtworzeniaOferty);
+        setOkresZobowiazania(okresZobowiazania);
+        setUslugaInternet(uslugaInternet);
+        this.sprzetModemWiFi = new ArrayList<>();
+    }
+
+    public Oferta(String nazwa, String opis, String author, LocalDate dataUtworzeniaOferty, int okresZobowiazania,
+                  UslugaInternet uslugaInternet) {
+        setNazwa(nazwa);
+        setDescript(opis, author);
         setDataUtworzeniaOferty(dataUtworzeniaOferty);
         setOkresZobowiazania(okresZobowiazania);
         setUslugaInternet(uslugaInternet);

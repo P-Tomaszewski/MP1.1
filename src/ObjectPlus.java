@@ -54,7 +54,7 @@ public class ObjectPlus implements Serializable
 
         for(Object obiekt : ekstensja)
         {
-            System.out.println(obiekt + "\n");
+            System.out.println(obiekt);
         }
     }
 }
