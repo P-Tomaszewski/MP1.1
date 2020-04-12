@@ -6,20 +6,18 @@ public  class Offer extends ObjectPlus implements Serializable{
 
     private static final long serialVersionUID = 007L;
     private String name;
-    private String descript;
+    private String descript; // opcjonalny
     private LocalDate offerCreationDate;
     private int commitmentPeriod; //atr prosty okres zob.
+    private static int minCommitmentPeriod = 12; //atr.klasowy
+    private static int maxCommitmentPeriod = 24;
     private LocalDate offerAvailabilityEndDate; //atr. pochodny z dataUtworzenia
-    private InternetService internetService; //atr. zlozony i opcjonalny
-    private ArrayList<EquipmentModemWiFi> equipmentModemWiFi; //atr. powtarzalny i opcjonalny
-    private static String targetGroup; //atr.klasowy
+    private InternetService internetService; //atr. zlozony
+    private ArrayList<EquipmentModemWiFi> equipmentModemWiFi; //atr. powtarzalny
 
-    public static String getTargetGroup() {
-        return targetGroup; }
-
-    public static void setTargetGroup(String targetGroup) {
-        Offer.targetGroup = targetGroup;
-    } //metoda klasowa
+    public void setOfferAvailabilityEndDate(LocalDate offerCreationDate) {
+        this.offerAvailabilityEndDate = offerCreationDate.plusYears(1);
+    }
 
     public LocalDate getOfferAvailabilityEndDate() {
         return offerAvailabilityEndDate;
@@ -30,6 +28,12 @@ public  class Offer extends ObjectPlus implements Serializable{
     }
 
     public void setCommitmentPeriod(int commitmentPeriod) {
+        if(commitmentPeriod < minCommitmentPeriod) {
+            throw new IllegalArgumentException("commitmentPeriod must by >= 12");
+        } else if(commitmentPeriod > maxCommitmentPeriod)
+        {
+            throw new IllegalArgumentException("commitmentPeriod must by <= 24");
+        }
         this.commitmentPeriod = commitmentPeriod;
     }
 
@@ -49,10 +53,6 @@ public  class Offer extends ObjectPlus implements Serializable{
         this.equipmentModemWiFi.add(equipmentModemWiFi);
     }
 
-    public void removeEquipmentModemWiFi(EquipmentModemWiFi equipmentModemWiFi){
-        this.equipmentModemWiFi.remove(equipmentModemWiFi);
-    }
-
     public String getName() {
         return name;
     }
@@ -62,6 +62,9 @@ public  class Offer extends ObjectPlus implements Serializable{
     }
 
     public String getDescript() {
+        if(descript == null){
+            return "brak opisu.";
+        }
         return descript;
     }
 
@@ -78,19 +81,17 @@ public  class Offer extends ObjectPlus implements Serializable{
     }
 
     public void setOfferCreationDate(LocalDate offerCreationDate) {
-        if(commitmentPeriod == 12) {
-            this.offerAvailabilityEndDate = offerCreationDate.plusYears(1);
-        } else
-        {
-            this.offerAvailabilityEndDate = offerCreationDate.plusYears(2);
-        }
+
         this.offerCreationDate = offerCreationDate;
     }
-
     public String toString(){
         StringBuilder result = new StringBuilder();
         result.append("Nazwa oferty: " + getName() + ", ");
-        result.append("Opis:  " + getDescript() + " ");
+        result.append("Opis:  " + getDescript() + ", ");
+        result.append("Data utworzenia "+ getOfferCreationDate() + ", ");
+        result.append("Data konca ofert: " + getOfferAvailabilityEndDate() + ", ");
+        result.append("Długosc zobowiązania: " + getCommitmentPeriod() + ", ");
+
         if(getInternetService() != null){
             result.append("Usluga: " + getInternetService().toString());
         }
@@ -104,6 +105,7 @@ public  class Offer extends ObjectPlus implements Serializable{
         setName(name);
         setDescript(descript);
         setOfferCreationDate(offerCreationDate);
+        setOfferAvailabilityEndDate(offerCreationDate);
         setCommitmentPeriod(commitmentPeriod);
         this.equipmentModemWiFi = new ArrayList<>();
     }
@@ -113,6 +115,7 @@ public  class Offer extends ObjectPlus implements Serializable{
         setName(name);
         setDescript(descript);
         setOfferCreationDate(offerCreationDate);
+        setOfferAvailabilityEndDate(offerCreationDate);
         setCommitmentPeriod(commitmentPeriod);
         setInternetService(internetService);
         this.equipmentModemWiFi = new ArrayList<>();
@@ -123,8 +126,17 @@ public  class Offer extends ObjectPlus implements Serializable{
         setName(name);
         setDescript(descript, author);
         setOfferCreationDate(offerCreationDate);
+        setOfferAvailabilityEndDate(offerCreationDate);
         setCommitmentPeriod(commitmentPeriod);
         setInternetService(internetService);
         this.equipmentModemWiFi = new ArrayList<>();
+    }
+
+    //metody klasowe
+    public static double getMinCommitmentPeriod(){
+        return minCommitmentPeriod;
+    }
+    public static double getMaxCommitmentPeriod(){
+        return maxCommitmentPeriod;
     }
 }

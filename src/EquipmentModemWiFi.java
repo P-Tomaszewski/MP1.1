@@ -25,7 +25,7 @@ public class EquipmentModemWiFi extends Equipment implements Serializable {
     public EquipmentModemWiFi(String model, String nrSeryjny, int maxSpeed, int minSpeed) {
      super(model, nrSeryjny);
      setMaxSpeed(maxSpeed);
-     setMaxSpeed(minSpeed);
+     setMinSpeed(minSpeed);
     }
 
     //Przesloniecie metody

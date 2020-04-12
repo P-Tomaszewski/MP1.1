@@ -8,22 +8,5 @@ public abstract class Equipment extends ObjectPlus {
         this.model = model;
         this.serialNumber = serialNumber;
     }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
-
 }
+
