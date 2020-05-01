@@ -28,10 +28,6 @@ public class EquipmentModemWiFi extends Equipment implements Serializable {
      setMinSpeed(minSpeed);
     }
 
-    //Przesloniecie metody
-    public String getModel() {
-        return "Model routera: " + model;
-    }
 
     public String toString(){
         return "Model: "+ model + " Numer seryjny: " + serialNumber + " predkosc min: " + minSpeed +"Mb/s predkosc max: " + maxSpeed +"Mb/s";

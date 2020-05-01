@@ -15,9 +15,6 @@ public  class Offer extends ObjectPlus implements Serializable{
     private InternetService internetService; //atr. zlozony
     private ArrayList<EquipmentModemWiFi> equipmentModemWiFi; //atr. powtarzalny
 
-    public void setOfferAvailabilityEndDate(LocalDate offerCreationDate) {
-        this.offerAvailabilityEndDate = offerCreationDate.plusYears(1);
-    }
 
     public LocalDate getOfferAvailabilityEndDate() {
         return offerAvailabilityEndDate;
@@ -84,6 +81,7 @@ public  class Offer extends ObjectPlus implements Serializable{
 
         this.offerCreationDate = offerCreationDate;
     }
+
     public String toString(){
         StringBuilder result = new StringBuilder();
         result.append("Nazwa oferty: " + getName() + ", ");
@@ -105,7 +103,7 @@ public  class Offer extends ObjectPlus implements Serializable{
         setName(name);
         setDescript(descript);
         setOfferCreationDate(offerCreationDate);
-        setOfferAvailabilityEndDate(offerCreationDate);
+        offerAvailabilityEndDate = offerCreationDate.plusYears(1);
         setCommitmentPeriod(commitmentPeriod);
         this.equipmentModemWiFi = new ArrayList<>();
     }
@@ -115,7 +113,7 @@ public  class Offer extends ObjectPlus implements Serializable{
         setName(name);
         setDescript(descript);
         setOfferCreationDate(offerCreationDate);
-        setOfferAvailabilityEndDate(offerCreationDate);
+        offerAvailabilityEndDate = offerCreationDate.plusYears(1);
         setCommitmentPeriod(commitmentPeriod);
         setInternetService(internetService);
         this.equipmentModemWiFi = new ArrayList<>();
@@ -126,7 +124,7 @@ public  class Offer extends ObjectPlus implements Serializable{
         setName(name);
         setDescript(descript, author);
         setOfferCreationDate(offerCreationDate);
-        setOfferAvailabilityEndDate(offerCreationDate);
+        offerAvailabilityEndDate = offerCreationDate.plusYears(1);
         setCommitmentPeriod(commitmentPeriod);
         setInternetService(internetService);
         this.equipmentModemWiFi = new ArrayList<>();

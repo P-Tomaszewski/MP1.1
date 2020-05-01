@@ -8,10 +8,10 @@ public class Main {
 Ekstensja
  Ekst. - trwałość +
  Atr. złożony +
- Atr. opcjonalny +
- Atr. powt. +
+ Atr. opcjonalny musi zwracac null i wyswielac cos  +
+ Atr. powt. nie moze byc polaczony z klasa +
  Atr. klasowy +
- Atr. pochodny +
+ Atr. pochodny nie moze byc setera +
  Met. klasowa +
  Przesłonięcie, przeciążenie + 
     */
@@ -19,10 +19,9 @@ Ekstensja
 
         if (new File("DaneOfertSprzetuUslug").isFile()) {
             try {
-                //miejsce docelowe pliku w workspace
                 FileInputStream fileInput = new FileInputStream("DaneOfertSprzetuUslug");
                 ObjectInputStream streamInput = new ObjectInputStream(fileInput);
-                //odczyt z dysku do pliku "daneFirmowe"
+                //odczyt z "daneFirmowe"
                 ObjectPlus.readEkstansja(streamInput);
                 streamInput.close();
                 fileInput.close();
@@ -37,6 +36,7 @@ Ekstensja
         }
 
         LocalDate date = LocalDate.now();
+
         EquipmentModemWiFi equipmentModemWiFi = new EquipmentModemWiFi("AsusXC190", "AWR12334",
                 120, 80);
         EquipmentModemWiFi equipmentModemWiFi1 = new EquipmentModemWiFi("AsusXC170", "AWT33321",
@@ -80,7 +80,7 @@ Ekstensja
         ObjectPlus.showEkstansja(InternetService.class);
 
         try {
-            //zapis z dysku do pliku "DaneOfertSprzetuUslug"
+            // do pliku "DaneOfertSprzetuUslug"
             FileOutputStream fileOutput = new FileOutputStream("DaneOfertSprzetuUslug");
             ObjectOutputStream StreamOutput = new ObjectOutputStream(fileOutput);
             ObjectPlus.saveEkstansja(StreamOutput);
