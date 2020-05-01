@@ -2,6 +2,7 @@
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
     /*
@@ -34,7 +35,6 @@ Ekstensja
                 return;
             }
         }
-
         LocalDate date = LocalDate.now();
 
         EquipmentModemWiFi equipmentModemWiFi = new EquipmentModemWiFi("AsusXC190", "AWR12334",
@@ -43,12 +43,13 @@ Ekstensja
                 200, 100);
         InternetService internetService = new InternetService("10", 20);
         InternetService internetService1 = new InternetService("20", 25);
-        Offer offer = new Offer("Oferta Noworoczna", "Oferta na nowy rok", date,
+        Offer offer = new Offer("Oferta Noworoczna", "Oferta na nowy rok", 30.00, date,
                 12);
-        Offer offer2 = new Offer("Oferta zwykła", null, date,
+        Offer offer2 = new Offer("Oferta zwykła", null,null, date,
                 24, internetService);
 
-        Offer offer3 = new Offer("Oferta wyjatkowa", "To jest miejsce na opis", "Patryk Tomaszewski", date,
+        Offer offer3 = new Offer("Oferta wyjatkowa", "To jest miejsce na opis", 120.00,
+                "Patryk Tomaszewski", date,
                 24, internetService); //przeciazony opis.
 
 
@@ -65,10 +66,12 @@ Ekstensja
         //Atrybut opcjonalny
        System.out.println("Atrybut opcjonalny: " + offer2.getDescript());
         //Przeciazenie metody dla opisu.
-        System.out.println("oferta" + offer3.getName() + offer3.getDescript());
+        System.out.println("Oferta " + offer3.getName() + offer3.getDescript());
         //Atrybut powtarzalny
         System.out.print("Atrybut powtarzalny, ");
-        offer.addEquipmentModemWiFi(equipmentModemWiFi);
+        offer.addTargetGroup("Korporacje");
+        offer.addTargetGroup("Detal");
+//        offer.addEquipmentModemWiFi(equipmentModemWiFi);
         offer.addEquipmentModemWiFi(equipmentModemWiFi1);
         System.out.println("Sprzet w ofercie " + offer.getName() + ":");
         for (EquipmentModemWiFi s : offer.getEquipmentModemWiFi()) {
@@ -78,6 +81,8 @@ Ekstensja
         ObjectPlus.showEkstansja(Offer.class);
         ObjectPlus.showEkstansja(EquipmentModemWiFi.class);
         ObjectPlus.showEkstansja(InternetService.class);
+
+
 
         try {
             // do pliku "DaneOfertSprzetuUslug"

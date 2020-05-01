@@ -6,15 +6,35 @@ public  class Offer extends ObjectPlus implements Serializable{
 
     private static final long serialVersionUID = 007L;
     private String name;
-    private String descript; // opcjonalny
+    private Double minimalPrice; //opcjonalny
+    private String descript;
     private LocalDate offerCreationDate;
     private int commitmentPeriod; //atr prosty okres zob.
     private static int minCommitmentPeriod = 12; //atr.klasowy
     private static int maxCommitmentPeriod = 24;
     private LocalDate offerAvailabilityEndDate; //atr. pochodny z dataUtworzenia
     private InternetService internetService; //atr. zlozony
-    private ArrayList<EquipmentModemWiFi> equipmentModemWiFi; //atr. powtarzalny
+    private ArrayList<String> targetGroup; //atr. powtarzalny
+    private ArrayList<EquipmentModemWiFi> equipmentModemWiFi;
 
+    public ArrayList<String> getTargetGroup() {
+        return targetGroup;
+    }
+
+    public void setTargetGroup(ArrayList<String> targetGroup) {
+        this.targetGroup = targetGroup;
+    }
+
+    public void setOfferAvailabilityEndDate(LocalDate offerCreationDate) {
+        this.offerAvailabilityEndDate = offerCreationDate.plusYears(1);
+    }
+    public Double getMinimalPrice() {
+        return minimalPrice;
+    }
+
+    public void setMinimalPrice(Double minimalPrice) {
+        this.minimalPrice = minimalPrice;
+    }
 
     public LocalDate getOfferAvailabilityEndDate() {
         return offerAvailabilityEndDate;
@@ -48,6 +68,10 @@ public  class Offer extends ObjectPlus implements Serializable{
 
     public void addEquipmentModemWiFi(EquipmentModemWiFi equipmentModemWiFi){
         this.equipmentModemWiFi.add(equipmentModemWiFi);
+    }
+
+    public void addTargetGroup(String targetGroup){
+        this.targetGroup.add(targetGroup);
     }
 
     public String getName() {
@@ -89,26 +113,33 @@ public  class Offer extends ObjectPlus implements Serializable{
         result.append("Data utworzenia "+ getOfferCreationDate() + ", ");
         result.append("Data konca ofert: " + getOfferAvailabilityEndDate() + ", ");
         result.append("Długosc zobowiązania: " + getCommitmentPeriod() + ", ");
-
+        if(minimalPrice != null){
+            result.append("Cena minimalna: " + getMinimalPrice() + ", ");
+        }
         if(getInternetService() != null){
             result.append("Usluga: " + getInternetService().toString());
         }
         if(getEquipmentModemWiFi() != null){
             result.append(" Sprzet: " + getEquipmentModemWiFi().toString());
         }
+        if(getTargetGroup() != null){
+            result.append("Grupa docelowa: " + getTargetGroup().toString());
+        }
         return result.toString();
     }
 
-    public Offer(String name, String descript, LocalDate offerCreationDate, int commitmentPeriod) {
+    public Offer(String name, String descript, Double minimalPrice , LocalDate offerCreationDate, int commitmentPeriod) {
         setName(name);
         setDescript(descript);
         setOfferCreationDate(offerCreationDate);
         offerAvailabilityEndDate = offerCreationDate.plusYears(1);
         setCommitmentPeriod(commitmentPeriod);
+        setMinimalPrice(minimalPrice);
+        this.targetGroup = new ArrayList<>();
         this.equipmentModemWiFi = new ArrayList<>();
     }
 
-    public Offer(String name, String descript, LocalDate offerCreationDate, int commitmentPeriod,
+    public Offer(String name, String descript, Double minimalPrice, LocalDate offerCreationDate, int commitmentPeriod,
                  InternetService internetService) {
         setName(name);
         setDescript(descript);
@@ -116,10 +147,12 @@ public  class Offer extends ObjectPlus implements Serializable{
         offerAvailabilityEndDate = offerCreationDate.plusYears(1);
         setCommitmentPeriod(commitmentPeriod);
         setInternetService(internetService);
+        setMinimalPrice(minimalPrice);
+        this.targetGroup = new ArrayList<>();
         this.equipmentModemWiFi = new ArrayList<>();
     }
 
-    public Offer(String name, String descript, String author, LocalDate offerCreationDate, int commitmentPeriod,
+    public Offer(String name, String descript, Double minimalPrice,  String author, LocalDate offerCreationDate, int commitmentPeriod,
                  InternetService internetService) {
         setName(name);
         setDescript(descript, author);
@@ -127,6 +160,8 @@ public  class Offer extends ObjectPlus implements Serializable{
         offerAvailabilityEndDate = offerCreationDate.plusYears(1);
         setCommitmentPeriod(commitmentPeriod);
         setInternetService(internetService);
+        setMinimalPrice(minimalPrice);
+        this.targetGroup = new ArrayList<>();
         this.equipmentModemWiFi = new ArrayList<>();
     }
 
