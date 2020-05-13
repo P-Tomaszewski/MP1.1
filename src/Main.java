@@ -9,10 +9,10 @@ public class Main {
 Ekstensja
  Ekst. - trwałość +
  Atr. złożony +
- Atr. opcjonalny musi zwracac null i wyswielac cos  +
- Atr. powt. nie moze byc polaczony z klasa +
+ Atr. opcjonalny DP
+ Atr. powt. DP
  Atr. klasowy +
- Atr. pochodny nie moze byc setera +
+ Atr. pochodny DP
  Met. klasowa +
  Przesłonięcie, przeciążenie + 
     */
@@ -81,8 +81,6 @@ Ekstensja
         ObjectPlus.showEkstansja(Offer.class);
         ObjectPlus.showEkstansja(EquipmentModemWiFi.class);
         ObjectPlus.showEkstansja(InternetService.class);
-
-
 
         try {
             // do pliku "DaneOfertSprzetuUslug"

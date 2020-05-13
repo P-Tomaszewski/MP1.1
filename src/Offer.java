@@ -25,9 +25,6 @@ public  class Offer extends ObjectPlus implements Serializable{
         this.targetGroup = targetGroup;
     }
 
-    public void setOfferAvailabilityEndDate(LocalDate offerCreationDate) {
-        this.offerAvailabilityEndDate = offerCreationDate.plusYears(1);
-    }
     public Double getMinimalPrice() {
         return minimalPrice;
     }
@@ -127,6 +124,8 @@ public  class Offer extends ObjectPlus implements Serializable{
         }
         return result.toString();
     }
+
+
 
     public Offer(String name, String descript, Double minimalPrice , LocalDate offerCreationDate, int commitmentPeriod) {
         setName(name);
